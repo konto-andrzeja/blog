@@ -30,8 +30,12 @@ class CommentsController < ApplicationController
   private
 
   def vote(value)
-    comment.votes.create value: value
-    redirect_to post
+    vote = comment.votes.new value: value, user: current_user
+    if vote.save
+      redirect_to post
+    else
+      redirect_to post, alert: "You can't vote twice!"
+    end
   end
 
   def comment_params

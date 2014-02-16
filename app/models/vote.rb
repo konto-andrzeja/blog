@@ -2,7 +2,9 @@ class Vote
   include Mongoid::Document
 
   belongs_to :comment
+  belongs_to :user
 
+  validates_uniqueness_of :user, :scope => :comment
   validates :value, inclusion: { in: [-1, 1] }
 
   field :value, type: Integer
