@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!
   expose_decorated(:posts) { Post.all }
   expose_decorated(:post, attributes: :post_params)
-  expose(:comments) { post.comments.where abusive: false }
+  expose(:comments) { visible_comments }
   expose(:tag_cloud) { [] }
 
   def index
@@ -46,6 +46,14 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def visible_comments
+    if post.user == current_user
+      post.comments
+    else
+      post.comments.where abusive: false
+    end
+  end
 
   def post_params
     return if %w{mark_archived}.include? action_name

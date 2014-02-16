@@ -4,6 +4,7 @@ class Comment
 
   field :body, type: String
   field :abusive, type: Boolean, default: false
+  field :marked_as_not_abusive, type: Boolean, default: false
 
   validates_presence_of :body
 

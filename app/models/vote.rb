@@ -12,7 +12,7 @@ class Vote
   private
 
   def update_abusive
-    if comment.votes.sum(:value) == -3
+    if comment.votes.sum(:value) == -3 and comment.marked_as_not_abusive == false
       comment.update_attribute :abusive, true
     end
   end

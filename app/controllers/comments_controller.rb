@@ -22,6 +22,11 @@ class CommentsController < ApplicationController
     vote -1
   end
 
+  def mark_as_not_abusive
+    comment.update_attributes abusive: false, marked_as_not_abusive: true
+    redirect_to post
+  end
+
   private
 
   def vote(value)

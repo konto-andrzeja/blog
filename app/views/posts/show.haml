@@ -25,4 +25,7 @@
   = comment.votes.where(value: 1).count
   = link_to "-", vote_down_post_comment_path(comment.post, comment), method: post
   = comment.votes.where(value: -1).count
+  - if comment.abusive
+    %br
+    = link_to "The comment below is not visible to other users because it received too many negative votes. You can make it visible again by clicking this link.", mark_as_not_abusive_post_comment_path(comment.post, comment), method: post
   %p= comment.body
