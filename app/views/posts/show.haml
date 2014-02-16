@@ -17,8 +17,12 @@
   = f.button :submit
 
 %h3 Comments:
-- post.comments.reverse_each do |comment|
+- post.comments.order('created_at DESC').each do |comment|
   %strong= comment.user.to_s
   %br
   %small= comment.created_at.to_s(:db)
+  = link_to "+", vote_up_post_comment_path(comment.post, comment), method: post
+  = comment.votes.where(value: 1).count
+  = link_to "-", vote_down_post_comment_path(comment.post, comment), method: post
+  = comment.votes.where(value: -1).count
   %p= comment.body

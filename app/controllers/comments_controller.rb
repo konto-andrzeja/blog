@@ -14,9 +14,22 @@ class CommentsController < ApplicationController
     end
   end
 
+  def vote_up
+    vote 1
+  end
+
+  def vote_down
+    vote -1
+  end
+
   private
 
+  def vote(value)
+    comment.votes.create value: value
+    redirect_to post
+  end
+
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body) if %w{create}.include? action_name
   end
 end
