@@ -3,6 +3,7 @@ class Comment
   include Mongoid::Timestamps
 
   field :body, type: String
+  field :abusive, type: Boolean, default: false
 
   validates_presence_of :body
 

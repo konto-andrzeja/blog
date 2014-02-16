@@ -17,7 +17,7 @@
   = f.button :submit
 
 %h3 Comments:
-- post.comments.order('created_at DESC').each do |comment|
+- comments.order('created_at DESC').each do |comment|
   %strong= comment.user.to_s
   %br
   %small= comment.created_at.to_s(:db)
