@@ -18,6 +18,8 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 
+gem 'rails_12factor', group: :production
+
 group :development do
   gem 'html2haml'
   gem 'quiet_assets'
