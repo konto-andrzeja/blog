@@ -1,4 +1,4 @@
-.post--full-size
+.post--full-size.clearfix
   %h2
     = post.title
     %small
@@ -10,3 +10,15 @@
   .post__tags-list.tagsinput
     - post.tags_array.each do |tag|
       = content_tag :span, tag, class: 'tag'
+
+%br
+= simple_form_for [post, Comment.new] do |f|
+  = f.input :body, as: :text, label: "Comment:"
+  = f.button :submit
+
+%h3 Comments:
+- post.comments.reverse_each do |comment|
+  %strong= comment.user.to_s
+  %br
+  %small= comment.created_at.to_s(:db)
+  %p= comment.body
